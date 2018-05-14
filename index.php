@@ -8,8 +8,10 @@ spl_autoload_register(function ($class_name) {
 
     $redisConfig = \classes\Config::get('REDIS_SERVER');
     $redis = new Redis();
-    $redis->connect($redisConfig['host'],$redisConfig['port']);
-    $redis->auth($redisConfig['password']);
+    if(!empty($redisConfig['host'])){
+        $redis->connect($redisConfig['host'],$redisConfig['port']);
+        $redis->auth($redisConfig['password']);
+    }
 
     //analyze request
     isset($_SERVER['PATH_INFO'])?$documentPath = $_SERVER['PATH_INFO']:$documentPath = '/Index/index';
