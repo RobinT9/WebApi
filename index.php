@@ -1,10 +1,12 @@
 <?php
+date_default_timezone_set("Asia/Shanghai");
 define('CONFIG_PATH',__DIR__.'/config/config.php');
 spl_autoload_register(function ($class_name) {
     $class_name = explode('\\',$class_name);
     $class_name = implode('/',$class_name);
     require_once $class_name . '.php';
 });
+
 
     $redisConfig = \classes\Config::get('REDIS_SERVER');
     $redis = new Redis();
